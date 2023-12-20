@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Result</title>
+</head>
+<body>
+
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Retrieve data from the form
+    $pemName = $_POST["pemName"];
+    $pemPosition = $_POST["pemPosition"];
+    // Retrieve other form fields in a similar manner...
+
+    // Display the retrieved data
+    echo "<h2>Form Submission Result</h2>";
+    echo "<p><strong>Nama Pemohon:</strong> $pemName</p>";
+    echo "<p><strong>Jawatan:</strong> $pemPosition</p>";
+    // Display other form fields...
+
+    // You can also store this data in a database or file for further use.
+} else {
+    echo "<p>No form data submitted.</p>";
+}
+?>
+
+</body>
+</html>

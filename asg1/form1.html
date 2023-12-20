@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="fStyle.css">
+    <title>BORANG PERMOHONAN KENDERAAN</title>
+    <link rel="icon" href="https://seeklogo.com/images/U/UITM-logo-20DC2B3831-seeklogo.com.png" type="image/x-icon">
+    <link rel="shortcut icon" href="https://seeklogo.com/images/U/UITM-logo-20DC2B3831-seeklogo.com.png" type="image/x-icon">
+<script>
+    
+    function addRow(tableId) {
+            var table = document.getElementById(tableId);
+            var rowCount = table.rows.length;
+
+            var row = table.insertRow(rowCount);
+
+            var cell1 = row.insertCell(0);
+            var cell2 = row.insertCell(1);
+            var cell3 = row.insertCell(2);
+            var cell4 = row.insertCell(3);
+            var cell5 = row.insertCell(4);
+
+            cell1.innerHTML = "<b>" + rowCount + "</b>";
+            cell2.innerHTML = "<input type='text' id='" + tableId + "PassName" + rowCount + "' name='" + tableId + "PassName'>";
+            cell3.innerHTML = "<input type='text' id='" + tableId + "PassCode" + rowCount + "' name='" + tableId + "PassCode'>";
+            cell4.innerHTML = "<input type='text' id='" + tableId + "PassIC" + rowCount + "' name='" + tableId + "PassIC'>";
+            cell5.innerHTML = "<input type='text' id='" + tableId + "PassNo" + rowCount + "' name='" + tableId + "PassNo'>";
+        }
+
+    function validateAndShowFormData(form) {
+        var isValid = validate(event, form);
+        
+        if (isValid) {
+            showFormData();
+        }
+    }
+
+
+        function validate(event, form) {
+            event.preventDefault();
+
+            var fail = "";
+            fail += validatePemName(form.pemName.value);
+            fail += validateStNum(form.stNum.value);
+            fail += validateSection(form.section.value);
+            fail += validateTelNum(form.telNum.value);
+            fail += validatePost(form.pemPosition.value);
+            fail += validatePegName(form.pegName.value);
+            fail += validatePegPosition(form.pegPosition.value);
+            fail += validatePegTelNum(form.pegTelNum.value);
+            fail += validatePurpose(form.purpose.value);
+            fail += validateDestination(form.destination.value);
+            fail += validateWaitArea(form.waitArea.value);
+            fail += validateRetArea(form.retArea.value);
+            fail += validateDepartureDate(form.depDate.value);
+
+            console.log("Fail:", fail);
+
+            if (fail === "" || fail.trim() === "") {
+                showFormData();
+                alert("Permohonan Berjaya Dihantar! Sila cetak dengan menekan butang 'CETAK' dibawah.");
+                return true;
+            } else {
+                alert("Permohonan gagal. Sila isi maklumat dengan betul.");
+                return false;
+            }
+        }
+
+
+    function validatePemName(field) {
+        if (field == "") {
+            alert("Sila isi Nama Pemohon!");
+            return "Sila isi Nama Pemohon!";
+        }
+    return "";
+    }
+
+    function validatePost(pemPosition) {
+        pemPosition =  pemPosition.toUpperCase();
+            if (pemPosition !== "STAFF" && pemPosition !== "PELAJAR") {
+                alert("Sila isi 'STAFF' atau 'PELAJAR' sahaja di Bahagian Butiran Pemohon!");
+                return "Invalid Position"; 
+            }
+        return "";
+    }
+
+    function validateSection(field) {
+        if (field == "")
+            alert("Sila isi Bahagian Pemohon!");   
+        return "";
+    }
+    
+    function validateStNum(field) {
+        if (field == "")
+            alert("Sila isi No. Pekerja/Pelajar Pemohon!");
+        else if (field.length < 10 || field.length > 10)
+            alert("No. Pekerja/Pelajar mestilah dalam 10 angka sahaja!");    
+        return "";
+    }
+    
+    function validateTelNum(field) {
+        if (field.length < 10 || field.length > 15)
+            alert("No. Telefon Pemohon tidak lengkap!");
+        return "";
+    }
+
+    function validatePegName(field) {
+        if (field == "")
+            alert("Sila isi Nama Pengguna/Pegawai Pengiring!");   
+        return "";
+    }
+
+    function validatePegPosition(field) {
+        var pegPosition = field.toUpperCase();
+            if (pegPosition !== "STAFF" && pegPosition !== "PELAJAR") {
+                alert("Sila isi 'STAFF' atau 'PELAJAR' sahaja di bahagian Butiran Pengguna/Pegawai Pengiring!");
+                return "Invalid Pegawai Position";  // Return a value when validation fails
+            }
+        return "";
+    }
+
+    function validatePegTelNum(field) {
+        if (field.length < 10 || field.length > 15)
+            alert("No. Telefon Pengguna/Pegawai Pengiring tidak lengkap!");
+        return "";
+    }
+
+    function validatePurpose(field) {
+        if (field == "")
+            alert("Sila nyatakan tujuan permohonan!");   
+        return "";
+    }
+
+    function validateDestination(field) {
+        if (field == "")
+            alert("Sila nyatakan lokasi lawatan!");   
+        return "";
+    }
+
+    function validateWaitArea(field) {
+        if (field == "")
+            alert("Sila nyatakan lokasi menunggu kenderaan!");   
+        return "";
+    }
+
+    function validateRetArea(field) {
+        if (field == "")
+            alert("Sila nyatakan lokasi menghantar kenderaan!");   
+        return "";
+    }
+
+    function validateDepartureDate() {
+        var departureDateInput = document.getElementById('depDate');
+        var selectedDepartureDate = new Date(departureDateInput.value);
+
+        // Get the current date
+        var currentDate = new Date();
+
+        // Calculate the date one week from now
+        var oneWeekLater = new Date(currentDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+
+        // Compare the selected date with one week later
+        if (selectedDepartureDate < oneWeekLater) {
+            alert("Tarikh Pergi mestilah sekurang-kurangnya seminggu dari tarikh semasa.");
+            departureDateInput.value = ""; // Clear the input if it doesn't meet the criteria
+            return false;
+        }
+
+        return "";
+    }
+
+    function showFormData() {
+    // Get the form elements
+        var formData = {
+            Nama_Pemohon : document.getElementById('pemName').value,
+            Jawatan_Pemohon : document.getElementById('pemPosition').value,
+            Bahagian_Pemohon : document.getElementById('section').value,
+            No_Pekerja_Pelajar : document.getElementById('stNum').value,
+            No_Telefon_Pemohon : document.getElementById('telNum').value,
+            Nama_Pegawai : document.getElementById('pegName').value,
+            Jawatan_Pegawai : document.getElementById('pegPosition').value,
+            No_Telefon_Pegawai : document.getElementById('pegTelNum').value,
+            Tujuan : document.getElementById('purpose').value,
+            Jumlah_Penumpang : document.getElementById('totPass').value,
+            Destinasi : document.getElementById('destination').value,
+            Tempat_Menunggu : document.getElementById('waitArea').value,
+            Tempat_Menghantar : document.getElementById('retArea').value,
+            VehicleType: getSelectedRadioValue('vehicle'),
+            VehicleNeed: getSelectedRadioValue('type'),
+            DepartureDate: document.getElementById('depDate').value,
+            ArrivalDate: document.getElementById('arrDate').value,
+            DepartureTime: document.getElementById('depTime').value,
+            ArrivalTime: document.getElementById('arrTime').value,
+        };
+
+        // Function to get the selected radio button value
+        function getSelectedRadioValue(name) {
+            var radios = document.getElementsByName(name);
+
+            for (var i = 0; i < radios.length; i++) {
+                if (radios[i].checked) {
+                    return radios[i].id;
+                }
+            }
+
+            return null;
+        }
+
+        // Create an HTML string to display the form data
+        var formDataHTML = `
+        <div class="header">
+            <div>
+                <img src="https://seeklogo.com/images/U/UITM-logo-20DC2B3831-seeklogo.com.png" alt="UiTM Logo" class="logo">
+            </div>
+
+            <div class="title-address">
+                <h1 class="title">UNIT KENDERAAN</h1>
+                <p class="address">
+                    BAHAGIAN HAL EHWAL PELAJAR & ALUMNI<br>
+                    UNIVERSITI TEKNOLOGI MARA<br>
+                    40450 SHAH ALAM<br>
+                    TEL : 03-5544 3024/3019/21/22/23/25 FAX : 03-55443020
+                </p>
+            </div>
+        </div>
+
+            <h3>Butiran Maklumat Permohonan:</h3>
+            <ul>`;
+        
+        for (var key in formData) {
+            formDataHTML += `<br><li><b>${key}:</b> ${formData[key]}</li>`;
+        }
+
+        formDataHTML += `</ul>`;
+
+        // Display the form data at the bottom of the page
+        document.getElementById('formDataDisplay').innerHTML = formDataHTML;
+
+        // Show the success alert
+        // alert("Permohonan Dihantar! Sila cetak dengan menekan butang 'CETAK'.");
+    }
+
+    function printFormData() {
+        // Get the content of the formDataDisplay div
+        var printContent = document.getElementById('formDataDisplay').innerHTML;
+
+        // Open a new window for printing
+        var printWindow = window.open('', '_blank');
+        
+        // Write the content to the new window
+        printWindow.document.write('<html><head><title>Butiran Maklumat</title></head><body>');
+        printWindow.document.write(printContent);
+        printWindow.document.write('</body></html>');
+
+        // Close the new window after printing
+        printWindow.document.close();
+        printWindow.print();
+        printWindow.close();
+    }
+
+</script>
+</head>
+<body>
+    <form method="post" action="" onsubmit="validate(event, this)">
+    <div class="header">
+        <div class="logo">
+            <img src="https://seeklogo.com/images/U/UITM-logo-20DC2B3831-seeklogo.com.png" alt="UiTM Logo">
+        </div>
+    
+        <div class="title-address">
+            <h1 class="title">UNIT KENDERAAN</h1>
+            <p class="address">
+                BAHAGIAN HAL EHWAL PELAJAR & ALUMNI<br>
+                UNIVERSITI TEKNOLOGI MARA<br>
+                40450 SHAH ALAM<br>
+                TEL : 03-5544 3024/3019/21/22/23/25 FAX : 03-55443020
+            </p>
+        </div>
+    
+        <div>
+            <h2 class="form-title">BORANG PERMOHONAN KENDERAAN</h2>
+        </div>
+    </div><br><br><br><br><br><br><br>
+  
+    <div class="checkbox-section" id="checkbox">
+        <h3 class="checkbox-title">SENARAI SEMAK (Sila Tandakan):</h3>
+        <ul class="checkbox-list">
+            <li><input type="checkbox" id="checkbox1"><label for="checkbox1">Borang permohonan telah lengkap di isi.</label></li>
+            <li><input type="checkbox" id="checkbox2"><label for="checkbox2">Borang ini hendaklah disahkan oleh Dekan/Timbalan Dekan/Ketua Bahagian/Ketua Pusat/Ketua Unit.</label></li>
+            <li><input type="checkbox" id="checkbox3"><label for="checkbox3">Permohonan hendaklah disertakan dengan surat kelulusan program/aktiviti sekiranya telah dikeluarkan.</label></li>
+            <li><input type="checkbox" id="checkbox4"><label for="checkbox4">Permohonan hanya boleh di semak 2 hari sebelum program dijalankan.</label></li>
+            <li><input type="checkbox" id="checkbox5"><label for="checkbox5">Salinan insuran sekiranya peserta/pengguna selain staf/pelajar UiTM</label></li>
+            <li><input type="checkbox" id="checkbox6"><label for="checkbox6">Permohonan yang lewat/ kurang dari 7 hari adalah bergantung kepada kekosongan.</label></li>    
+            <li><input type="checkbox" id="checkbox7"><label for="checkbox7">Saya telah membaca dan memahami syarat-syarat penggunaan kenderaan seperti yang dilampirkan.</label></li>
+        </ul>
+    </div>
+
+    <div class="radio-section" id="transType">
+        <h3 class="radio-title">JENIS KENDERAAN DIPOHON:</h3>
+        <ul class="radio-list">
+            <li><input type="radio" id="Car" name="vehicle" required><label for="car">Kereta</label></li>
+            <li><input type="radio" id="Bus" name="vehicle"><label for="bus">Bas</label></li>
+            <li><input type="radio" id="MPV" name="vehicle"><label for="mpv">MPV</label></li>
+            <li><input type="radio" id="Van" name="vehicle"><label for="van">Van</label></li>
+            <li><input type="radio" id="4WD" name="vehicle"><label for="4wd">4WD</label></li>
+            <li><input type="radio" id="Lorry" name="vehicle"><label for="lorry">Lori</label></li>
+        </ul>
+    </div>        
+        
+    <div class="radio-section" id="vecNeed">
+        <h3 class="radio-title">KEPERLUAN KENDERAAN</h3>
+        <ul class="radio-list">
+            <li><input type="radio" id="Hantar_&_Ambil" name="type" required><label for="type1">Hantar & Ambil</label></li>
+            <li><input type="radio" id="Digunakan_Sepanjang_Program" name="type" required><label for="type2">Digunakan Sepanjang Program</label></li>
+        </ul>
+    </div>
+
+    <div class="table-section" id="appDetail">
+        <h3 class="table-title">BUTIRAN PEMOHON:</h3>
+        <table class="input-table">
+            <tr>
+                <td><label for="pemName">Nama Pemohon:</label></td>
+                <td colspan="3"><input type="text" id="pemName" name="pemName" placeholder="MUHAMMAD BIN ALI"></td>
+            </tr>
+            <tr>
+                <td><label for="pemPosition">Jawatan:</label></td>
+                <td><input type="text" id="pemPosition" name="pemPosition" placeholder="STAFF / PELAJAR"></td>
+                <td><label for="section">Bahagian:</label></td>
+                <td><input type="text" id="section" name="section" placeholder="FAKULTI"></td>
+            </tr>
+            <tr>
+                <td><label for="stNum">No. Pekerja/Pelajar:</label></td>
+                <td><input type="text" id="stNum" name="stNum" placeholder="(CONTOH : 2018416248)"></td>
+                <td><label for="telNum">No. Telefon:</label></td>
+                <td><input type="text" id="telNum" name="telNum" placeholder="(CONTOH : 0123234242)"></td>
+            </tr>
+        </table>
+    </div>
+  
+    <div class="table-section" id="offDetail">
+        <h3 class="table-title">BUTIRAN PENGGUNA/PEGAWAI PENGIRING (Sila buat lampiran sekiranya tidak mencukupi):</h3>
+        <table class="input-table">
+            <tr>
+                <td><label for="pegName">Nama Pengguna:</label></td>
+                <td><label for="pegPosition">Jawatan:</label></td>
+                <td><label for="pegTelNum">No. Telefon:</label></td>
+            </tr>
+            <tr>
+                <td><input type="text" id="pegName" name="pegName" placeholder="MUHAMMAD BIN ALI"></td>
+                <td><input type="text" id="pegPosition" name="pegPosition" placeholder="STAFF / PELAJAR"></td>
+                <td><input type="text" id="pegTelNum" name="pegTelNum" placeholder="(CONTOH : 0123234242)"></td>
+            </tr>
+        </table>
+    </div>
+ 
+    <div class="table-section" id="useDetail">
+        <h3 class="table-title">BUTIRAN PENGGUNAAN:</h3>
+        <table class="input-table">
+            <tr>
+                <td><label for="purpose">Tujuan:</label></td>
+                <td><input type="text" id="purpose" name="purpose" placeholder="(CONTOH: LAWATAN RASMI)"></td>
+                <td><label for="totPass">Jumlah Penumpang:</label></td>
+                <td><input type="text" id="totPass" name="totPass" placeholder="(CONTOH: 10 ORANG)"></td>
+            </tr>
+            <tr>
+                <td><label for="destination">Destinasi:</label></td>
+                <td colspan="3"><input type="text" id="destination" name="destination" placeholder="LOKASI LAWATAN"></td>
+            </tr>
+            <tr>
+                <td><label for="waitArea">Tempat Menunggu:</label></td>
+                <td><input type="text" id="waitArea" name="waitArea" placeholder="LOKASI MENUNGGU KENDERAAN"></td>
+                <td><label for="return">Destinasi Kembali:</label></td>
+                <td><input type="text" id="retArea" name="retArea" placeholder="LOKASI MENGHANTAR KENDERAAN"></td>
+            </tr>
+        </table>
+    </div>
+  
+    <div class="table-section" id="travDetail">
+        <h3 class="table-title">BUTIRAN PERJALANAN:</h3>
+        <p>Sila lampirkan butiran penggunaan kenderaan sekiranya melebihi sehari.</p>
+        <table class="input-table">
+            <tr>
+                <td><label for="depDate">Tarikh Pergi:</label></td>
+                <td><input type="date" id="depDate" name="depDate"></td>
+                <td><label for="arrDate">Tarikh Balik:</label></td>
+                <td><input type="date" id="arrDate" name="arrDate"></td>
+            </tr>
+            <tr>
+                <td><label for="depTime">Masa Pergi:</label></td>
+                <td><input type="time" id="depTime" name="depTime"></td>
+                <td><label for="arrTime">Masa Balik:</label></td>
+                <td><input type="time" id="arrTime" name="arrTime"></td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="table-section" id="passDetail">
+        <h3 class="table-title">Senarai Penumpang Van/MPV/4WD:</h3>
+        <table class="input-table" id="passengerTable">
+            <tr>
+                <td><b>BIL</b></td>
+                <td><b>NAMA</b></td>
+                <td><b>JAWATAN</b></td>
+                <td><b>NO KP</b></td>
+                <td><b>NO. PEKERJA/NO. PELAJAR</b></td>
+            </tr>
+            <tr>
+                <td><b>1</b></td>
+                <td><input type="text" id="passName1" name="passName" placeholder="*Isi jika berkaitan"></td>
+                <td><input type="text" id="passPosition1" name="passPosition" placeholder="*Isi jika berkaitan"></td>
+                <td><input type="text" id="PassIC1" name="PassIC" placeholder="*Isi jika berkaitan"></td>
+                <td><input type="text" id="passNo1" name="passNo" placeholder="*Isi jika berkaitan"></td>
+            </tr>            
+        </table>
+        <br><a href="#" class="add-row-button" onclick="addRow('passengerTable')">Add Row</a><br>
+    </div>
+
+        <div class="table-section" id="busPassDetail">
+            <h3 class="table-title">Senarai Penumpang Bas:</h3>
+            <table class="input-table" id="busPassengerTable">
+                <tr>
+                    <td><b>BIL</b></td>
+                    <td><b>NAMA</b></td>
+                    <td><b>KOD KURSUS</b></td>
+                    <td><b>NO KP</b></td>
+                    <td><b>NO. PEKERJA/PELAJAR</b></td>
+                </tr>
+                <tr>
+                    <td><b>1</b></td>
+                    <td><input type="text" id="busPassName1" name="busPassName" placeholder="*Isi jika berkaitan"></td>
+                    <td><input type="text" id="busPassCode1" name="busPassCode" placeholder="*Isi jika berkaitan"></td>
+                    <td><input type="text" id="busPassIC1" name="busPassIC" placeholder="*Isi jika berkaitan"></td>
+                    <td><input type="text" id="busPassNo1" name="busPassNo" placeholder="*Isi jika berkaitan"></td>
+                </tr>
+            </table>
+            <br><a href="#" class="add-row-button" onclick="addRow('busPassengerTable')">Add Row</a><br>
+        </div>
+        
+        <div class="button-section">
+            <a  class="add-row-button" href="index.php" class="social-link">Back</a>
+            <!-- <button type="submit" class="add-row-button" onclick="validate(this.form)">Hantar</button> -->
+            <button class="add-row-button" onclick="validateAndShowFormData(this.form)">Semak</button>
+            <button class="add-row-button" onclick="printFormData()">Cetak</button>
+        </div>
+    </form>
+
+    <div id="formDataDisplay"></div>
+
+</body>
+</html>
