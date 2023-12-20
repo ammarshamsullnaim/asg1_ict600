@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.header {
+    text-align: center;
+}
+
+.logo {
+    float: left;
+    width: 50px;
+    height: 50px;
+    margin-right: 0px;
+}
+
+.title-address {
+    display: inline-block;
+    margin-left: 10px;
+}
+
+.title {
+    font-weight: bold;
+}
+
+.address {
+    text-align: center;
+}
+
+.form-title {
+    text-align: center;
+    font-weight: bold;
+}
+
+.checkbox-section {
+    margin-top: 20px;
+}
+
+.checkbox-title {
+    text-align: left;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.checkbox-list {
+    list-style: none;
+}
+
+.checkbox-list li {
+    margin-bottom: 10px;
+}
+
+.checkbox-list input {
+    margin-right: 5px;
+}
+
+.radio-section {
+    margin-top: 20px;
+}
+
+.radio-title {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.radio-list {
+    list-style: none;
+}
+
+.radio-list li {
+    margin-bottom: 10px;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.radio-list input {
+    margin-right: 5px;
+}
+
+.table-section {
+    margin-top: 20px;
+}
+
+.table-title {
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+.input-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.input-table td {
+    padding: 8px;
+    border: 1px solid #000;
+}
+
+.input-table input {
+    width: 100%;
+    box-sizing: border-box; 
+}
+
+#disp {
+    color: rgb(255, 0, 0);
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.welcome-links {
+    display: flex;
+    justify-content: center;
+  }
+
+.button-section {
+    text-align: center; 
+    margin-top: 20px; 
+}
+
+.add-row-button,
+.social-link {
+    display: inline-block;
+    margin: 0 10px;
+    padding: 10px 20px;
+    text-decoration: none;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.add-row-button:hover,
+.social-link:hover {
+    background-color: #3498db;
+}

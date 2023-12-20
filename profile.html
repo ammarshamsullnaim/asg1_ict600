@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+  <link rel="stylesheet" href="profstyle.css">
+  <title>My Profile</title>
+
+<style>
+  .container {
+    max-width: 500px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+    animation: fadeInContainer 3s ease-in-out;
+    position: relative; /* Added position relative for absolute positioning of close button */
+  }
+
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+  }
+
+  @keyframes fadeInContainer {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>
+
+</head>
+<body>
+
+  <div class="background-image">
+    <div class="container animated fadeIn">
+      <span class="close-button" onmouseover="hoverClose()" onclick="closeTab()">&#10006;</span>
+      <div class="profile-card text-center">
+        <div class="profile-picture mx-auto">
+          <img src="https://lh3.googleusercontent.com/a/ACg8ocLuz2_sKoY7gwS1rZwB7W0-GMKdLmiIdRkAmq9n4850xeI=s360-c-no" alt="Profile Picture" class="img-fluid rounded-circle">
+        </div>
+        
+        <div class="profile-info">
+          <h2>MUHAMMAD AMMAR BIN SHAMSULL NAIM</h2>
+          <p class="lead">Matric No: 2021812554</p>
+          <p>Class Group: RCS240 5A</p>
+        </div>
+
+        <div class="welcome-links mt-3">
+          <a href="index.html" class="btn btn-primary">Back to Home Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+  <script>
+      window.onload = function() {
+        alert("Disclaimer: Don't click X button!");
+      };
+
+      function closeTab() {
+        window.open('https://www.youtube.com/watch?v=df5l7W8_xuA', '_blank');
+      }
+  </script>
+
+</body>
+</html>
